@@ -1,0 +1,106 @@
+        <div class="container" >
+            <div class="row" >
+                <div class="col-12-lg" >
+
+                    <form novalidate [formGroup]="userCreateFormGroup" (ngSubmit)="createUserValidator()" class ="form-inline" id="createUser">
+                        <div class="form-group">
+                            <input formControlName ="userCreateForm" name="newEmailForm" type="text" class="form-control" id="new_client_email" placeholder="Client Email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <button  [disabled]="userCreateFormGroup.invalid || (! userCreateForm.value)" id="createUserSub" class ="form-control" type="submit">Create User</button> 
+                        </div>
+                        </form>
+
+                        </div>
+            </div>
+            <div *ngIf="userCreateForm.hasError('emailExists')" >
+                <span class="text-danger">user "{{userCreateForm.value}} exists"</span>
+            </div>    
+        </div>
+        <br>
+
+        <div class="container" >
+            <div class="row" >
+                <div class="col-12-lg" >
+
+
+                <form novalidate [formGroup]="uploadFormGroup" (ngSubmit)="uploadValidator()" class="form-inline"  id="imageUpload" >
+
+                    <div class="form-group">
+                       <input formControlName="imageForm"  (change)="imageStageing($event)" name="images" type="file" class="form-control" multiple=""  >
+                    </div>
+                    <div class="form-group">
+                       <input formControlName="zipForm"  (change)="zipFile($event)" name="zip" type="file" class="form-control" accept=".zip"  >
+                    </div>
+
+                    <div class="form-group">
+                        <input   formControlName= "folderNameForm"  name="folderName" type="text" class="form-control" id="folder_name" placeholder="Folder Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input (keyup) = "emailPredict($event)" formControlName="emailForm" autocomplete="off"  name="email" type="text" class="form-control" placeholder="Client Email"  required>
+                    </div>
+
+
+                        <button [disabled]="uploadFormGroup.invalid"  class = "form-control" type="submit">Upload</button>
+                    </form>
+
+                    <div class="form-group" class="form-inline">
+                        <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPaymentModal"  class="form-control">Add Payment</button>
+                    </div>
+
+
+
+                <ul *ngIf="emailCopy.size > 0 && emailForm.value.length! "   >
+                    <li *ngFor="let email of emailCopy" (click)="emailForm.setValue(email)"  (click)="emailCopy.clear()"  value="email">{{email}}</li>
+                </ul>
+            </div>
+
+
+
+            <div class="modal fade" id="addPaymentModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Payment to Project</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        ‎€   <input [(ngModel)] ="projectFee" class="form-control" type="number" step="any" min=".0" style="width: 95%;  float :right;">
+                    </div>
+                    <div class="modal-footer">
+                    <button (click) ="projectFee = 0" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Payment Fee</button>
+                    <button  data-dismiss="modal" type="button" class="btn btn-primary">Set Payment</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+        </div>
+
+            <div *ngIf="uploadProgress > 0 ">
+                thumbnail progress
+                <progress  [value]="uploadProgress"  max="100" title="thumbnails" ></progress> 
+            </div>    
+            <div *ngIf="zipProgress > 0 ">
+                zip progress
+                <progress [value]="zipProgress"  max="100" title="zip file" ></progress>
+            </div>    
+
+            <div *ngIf="emailForm.hasError('emailNotExist')" >
+                <span class="text-danger">No user "{{emailForm.value}}"</span>
+            </div>    
+
+            <div *ngIf="folderNameForm.hasError('folderExists')" >
+                <span class="text-danger">"{{folderNameForm.value}}" folder name in use</span>
+            </div>    
+
+            <div *ngIf="imageForm.errors && (folderNameForm.touched || emailForm.touched)">
+                <span class="text-danger">No submited files</span>
+            </div>    
+
+
+            <projects-table></projects-table> 

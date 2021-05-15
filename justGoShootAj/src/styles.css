@@ -1,0 +1,197 @@
+.navbar{
+    position: relative;
+}
+
+@media (min-width: 1000px) {
+    .navbar-brand.abs
+
+        {
+            position: absolute;
+            left:  50%;
+            margin-left:  -60px !important;
+            display: block;
+            margin-top: 95px;
+            
+        }
+    }
+#logo {
+    padding: 0px;
+}
+
+.navbar-lightBlue{
+    background-color:#78bfc9
+}
+
+a.nav-link{
+     font-size: 1.35rem;
+}
+
+#carousel{
+    padding-top:  95px;
+}
+
+#imageCollection {
+    margin-top: 100px;
+}
+
+#imageCollection img{
+    width: 100%;
+    padding: 1px;
+}
+
+#centerCar{
+    padding-right: 75px;
+    padding-left: 75px;
+
+}
+
+p,h1,h2,h3,h4,h5,h6 {
+    font-family: 'EB Garamond', serif  !important;
+}
+
+.navIndex{
+    z-index: 2;
+}
+
+#top{
+   margin-top: 150px;
+
+}
+
+#googleMaps{
+
+    height: 200%;
+    margin-bottom: 100px;
+
+}
+
+#socalPadding{
+    padding-left: 10px;
+}
+
+body{
+    background-color: #fbfbfb;
+}
+
+
+#createUser {
+    margin-top: 200px;
+}
+
+#scrollableUploads{ 
+    margin-top: 100px;
+    overflow-y:  scroll;
+    background-color: white;
+    height: 50vh;
+    
+
+}
+
+
+#scrollableUploads img{ 
+    width: 125px;
+    height: auto;
+    vertical-align: top;
+}
+
+#scrollableUploads input{ 
+    width: 60px;
+    height: 19px;
+}
+
+
+tr:nth-child(even) {
+    background-color: rgb(120 191 201 / 4%);
+
+}
+
+.autocomplete-suggestions{
+    background-color: white;
+    background-origin: padding-box;
+}
+
+
+#createUserSub{
+    width:  174px;
+}
+
+#gallery{
+    background-color: white;
+}
+
+#gallery img{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+#imageOverlay{
+    position: fixed;
+    width:  100%;
+    height:  100%;
+    top :0;
+    bottom :0;
+    left :0;
+    right :0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 4;
+}
+
+#carouselUserGallery{
+    margin-left: 15%;
+    margin-right: 15%;
+    z-index: 5;
+    transform: translateY(28vh);
+}
+
+#xButton{
+    width: 20px;
+    float: right;
+}
+
+.topBanner{
+    background-color: rgba(0,0,0,0.8); 
+    height: 180px;
+    width: 100%;
+    position: absolute;
+    color: white;
+    text-align: center;
+}
+
+.topBanner  p {
+    margin-top: 0;
+    position: absolute;
+    top:  50%;
+    margin-left: 50%;
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+
+#photos {
+    /*https://css-tricks.com/seamless-responsive-photo-grid/ */
+    -moz-column-count:    4;
+    -webkit-column-count: 4;
+    column-count:         4;
+}
+
+@media (max-width: 1200px) {
+    #photos {
+    -moz-column-count:    3;
+    -webkit-column-count: 3;
+    column-count:         3;
+    }
+  }
+
+  @media (max-width: 800px) {
+    #photos {
+    -moz-column-count:    2;
+    -webkit-column-count: 2;
+    column-count:         2;
+    }
+  }
+  @media (max-width: 400px) {
+    #photos {
+    -moz-column-count:    1;
+    -webkit-column-count: 1;
+    column-count:         1;
+    }
+  }

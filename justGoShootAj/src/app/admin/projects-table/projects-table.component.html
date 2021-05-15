@@ -1,0 +1,25 @@
+<br>
+<table class="table" id="uploadsTable">
+    <thead>
+        <tr>
+            <th style="width: 20%">Gallery</th>
+            <th style="width: 20%">Name</th>
+            <th style="width: 20%">Email</th>
+            <th style="width: 20%">Folder Name</th>
+            <th style="width: 20%">Payment</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr *ngFor="let userProjectRecord of userProjectRecords$  | keyvalue ">
+                <td> <img  style =" width: 100px;"  [src]="userProjectRecord.value[0]" (click) ="gallery(userProjectRecord.key, userProjectRecord.value[1], userProjectRecord.value[2])" />  </td>
+                <td  > {{userProjectRecord.value[1].name}}</td>
+                <td  > {{userProjectRecord.value[1].email}}</td>
+                <td  > {{userProjectRecord.key}}</td>
+                <td> <span *ngIf="outstandingFees[userProjectRecord.key]">€</span> {{ outstandingFees[userProjectRecord.key] }}  </td> 
+            </tr>
+        
+
+
+    </tbody>
+</table>

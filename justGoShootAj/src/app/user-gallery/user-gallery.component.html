@@ -1,0 +1,65 @@
+<gallery-overlay (exitOverlay)="overlayExitEvent($event)" [flattenedImageArray]="flattenedImageArray"  [currentImageIndex] = "currentImageIndex" *ngIf="overlay"></gallery-overlay>
+
+<div id="imageCollection"  class="container">
+    <select id="folderSelect"  (click)=selectedFolder($event.target.value) class = "form-control">
+        <!-- need to set default form url-->
+        <option [selected]="folderName" *ngFor="let project of projectRecords$ | keyvalue" id="folderOptions"  [value] = "project.key">{{project.key}}</option>
+    </select> 
+
+    <button class = "form-control" (click) = "download()" id="download">Download</button>
+    <div *ngIf="user?.admin" class="imageUpload" class = "form-control">
+        <input (change)="addImages($event)" name="images" type="file" multiple="" >
+        <button (click) ="imageUpload()" type="submit">Submit Images</button>
+
+        <div *ngIf="uploadProgress > 0 ">
+            <progress [value]="uploadProgress"  max="100" ></progress>
+        </div>    
+    </div>
+
+
+
+
+    <div id="gallery">
+        <div id="photos" >
+        </div>
+    </div>
+    <br>
+
+    <div id="photos">
+        <ng-container  *ngFor= "let i=index; let arraysOfUrls of projectRecords$[folderName] | keyvalue  " >
+            <ng-container *ngIf="i ==  page ">
+                <div  *ngFor="let url of arraysOfUrls.value   ; let imageIndex = index">
+                    <div class="thumb">
+                        <img *ngIf="user?.admin"  (click)= "del(url,imageIndex )" src="../../assets/images/x.png" class="xButton" [id]="'xButton_' + imageIndex" style="width: 20px; display:block; position: fixed;"/>
+                        <img (click)="enterGallery(imageIndex )"   [src]="url  "  [id]=imageIndex/> 
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+
+
+
+
+
+    <nav id = "imageNav" class="d-flex justify-content-center" aria-label="Gallery Nav">
+        <ul class="pagination">
+            <li class="page-item" *ngIf="page > 0; ">
+                <a (click) = "pageChange('-1')" id = "prev" class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+
+            <li class="page-item" *ngIf="page  < projectRecords$[folderName]?.length -1">
+                <a (click) = "pageChange('1')" id = "next" class="page-link"  aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
